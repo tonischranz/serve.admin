@@ -1,0 +1,5 @@
+{
+    "namespace": "tsd\\serve\\admin",
+    "forceLayout": true,
+    "overrideController": true
+}
