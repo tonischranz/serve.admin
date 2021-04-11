@@ -2,12 +2,11 @@
 namespace tsd\serve\admin;
 
 use tsd\serve\Controller;
+use tsd\serve\SecurityGroup;
 
 class MemberController extends Controller
 {
-    /**
-     * @SecurityGroup developer
-     */
+    #[SecurityGroup('developer')]
     function showIndex()
     {
         return $this->view();
