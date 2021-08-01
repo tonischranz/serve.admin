@@ -3,18 +3,26 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>[admin]</title>
+    <style>
+      ul.tiles ul {list-style: none; }
+      ul.tiles {display: flex; flex-flow: row wrap; list-style: none; justify-content: space-around;  }
+      ul.tiles>li{margin-bottom: 2em;width: 10em; background: #9999; padding: .5em 2em;border-radius: 2em; margin-right: auto; margin-bottom: auto; margin-top: 1em;}
+      ul.tiles a i.i {font-size: 3em; font-style: normal;}
+    </style>
   </head>
 
   <body>
     <main>
-      <h1><a href="{@pluginRoot}">⚒</a> tsd.serve</h1>
+      <!--<h1><a href="{@pluginRoot}">⚒</a> tsd.serve</h1>-->
       <ul class="tiles">
-        <li><a href="{@pluginRoot}/code">♻ code</a></li>
-        <li><a href="{@pluginRoot}/conf">🔧 conf</a></li>
-        <li><a href="{@pluginRoot}/txt">📝 txt</a></li>
-        <li><a href="{@pluginRoot}/mem">🧒 mem</a></li>
-        <li><a href="{@pluginRoot}/mod">🛰 mod</a></li>
-        <li><a href="{@pluginRoot}/upd">📡 upd</a></li>
+        <li>
+          <a href="{@pluginRoot}/code"><i class="i">✏</i> code</a>
+        </li>
+        <li><a href="{@pluginRoot}/conf"><i class="i">🔧</i> conf</a></li>
+        <li><a href="{@pluginRoot}/txt"><i class="i">📝</i> txt</a></li>
+        <li><a href="{@pluginRoot}/mem"><i class="i">🧒</i> mem</a></li>
+        <li><a href="{@pluginRoot}/mod"><i class="i">🛰</i> mod</a></li>
+        <li><a href="{@pluginRoot}/upd"><i class="i">📡</i> upd</a></li>
       </ul>
     </main>
   </body>
