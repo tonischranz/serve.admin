@@ -4,7 +4,7 @@ namespace tsd\serve\admin;
 use tsd\serve\Controller;
 use tsd\serve\SecurityGroup;
 
-class LabelsController extends Controller
+class TextController extends Controller
 {
     #[SecurityGroup('admin')]
     #[SecurityGroup('editor')]
