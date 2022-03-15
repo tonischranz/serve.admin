@@ -14,7 +14,8 @@ class AdminControllerBase extends Controller
             ['url' => 'code', 'name' => 'code', 'children' => [
                 ['url' => 'code/controller', 'name' => 'controller'],
                 ['url' => 'code/src', 'name' => 'src'],
-                ['url' => 'code/views', 'name' => 'views']
+                ['url' => 'code/views', 'name' => 'views'],
+                ['url' => 'code/foo', 'name' => 'foo']
             ]],
             ['url' => 'config', 'name' => 'config'],
             ['url' => 'plugins', 'name' => 'plugins'],

@@ -11,4 +11,22 @@ class CodeController extends AdminControllerBase
     {
         return $this->view();
     }
+
+    #[SecurityGroup("developer")]
+    function showController()
+    {
+        return $this->view();
+    }
+
+    #[SecurityGroup("developer")]
+    function showViews()
+    {
+        return $this->view();
+    }
+
+    #[SecurityGroup("developer")]
+    function showSrc()
+    {
+        return $this->view();
+    }
 }
