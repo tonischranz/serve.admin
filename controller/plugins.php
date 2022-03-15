@@ -1,10 +1,10 @@
 <?php
 namespace tsd\serve\admin;
 
-use tsd\serve\Controller;
+use tsd\serve\admin\AdminControllerBase;
 use tsd\serve\SecurityGroup;
 
-class PluginsController extends Controller
+class PluginsController extends AdminControllerBase
 {
     #[SecurityGroup('admin')]
     function showIndex()

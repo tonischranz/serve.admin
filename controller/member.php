@@ -1,10 +1,10 @@
 <?php
 namespace tsd\serve\admin;
 
-use tsd\serve\Controller;
+use tsd\serve\admin\AdminControllerBase;
 use tsd\serve\SecurityGroup;
 
-class MemberController extends Controller
+class MemberController extends AdminControllerBase
 {
     #[SecurityGroup('developer')]
     function showIndex()

@@ -1,19 +1,14 @@
 <?php
 namespace tsd\serve\admin;
 
-use tsd\serve\Controller;
+use tsd\serve\admin\AdminControllerBase;
 use tsd\serve\SecurityUser;
 
-class DefaultController extends Controller
+class DefaultController extends AdminControllerBase
 {
     #[SecurityUser]
     function showIndex()
     {
         return $this->view();
-    }
-
-    function getMenu()
-    {
-        
     }
 }

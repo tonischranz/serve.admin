@@ -1,10 +1,10 @@
 <?php
 namespace tsd\serve\admin;
 
-use tsd\serve\Controller;
+use tsd\serve\admin\AdminControllerBase;
 use tsd\serve\SecurityGroup;
 
-class TextController extends Controller
+class TextController extends AdminControllerBase
 {
     #[SecurityGroup('admin')]
     #[SecurityGroup('editor')]

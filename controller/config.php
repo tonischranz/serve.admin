@@ -1,11 +1,11 @@
 <?php
 namespace tsd\serve\admin;
 
-use tsd\serve\Controller;
+use tsd\serve\admin\AdminControllerBase;
 use tsd\serve\SecurityGroup;
 
 
-class ConfigController extends Controller
+class ConfigController extends AdminControllerBase
 {
     #[SecurityGroup('admin')]
     function showIndex()
