@@ -53,25 +53,50 @@ class AdminControllerBase extends Controller
                     if (!$ok) continue;
                 }
 
-                $mi = ['url' => $name, 'name' => $miAtt->name];
+                $mi = ['url' => $name, 'name' => $miAtt->name, 'children' => []];
 
                 //todo: other MenuItems (children)
+                $methods = $refClass->getMethods();
+                
+                foreach($methods as $m)
+                {
+                    if ($m->name == "showIndex") continue;
+
+                    $methodName = strtolower(substr($m->name, 4));
+                    
+                    $miAttrs = $m->getAttributes('tsd\serve\MenuItem');
+                    $secUserAttr = $m->getAttributes('tsd\serve\SecurityUser');
+                    $secGroupAttrs = $m->getAttributes('tsd\serve\SecurityGroup');
+
+                    if (!$miAttrs) continue;
+
+                    $miAtt = $miAttrs[0]->newInstance();
+
+                    if($secUserAttr && $this->_member->isAnonymous()) continue;
+                    if($secGroupAttrs)
+                    {
+                        $ok = false;
+
+                        foreach($secGroupAttrs as $sga)
+                        {
+                            $sgAtt = $sga->newInstance();
+                            if ($this->_member->isInGroup($sgAtt->name))
+                            {
+                                $ok = true;
+                                break;
+                            }
+                        }
+
+                        if (!$ok) continue;
+                    }
+
+                    $mi['children'][] = ['url' => "$name/$methodName", 'name' => $miAtt->name];
+                }
 
                 $menu[] = $mi;
             }             
         }
 
-        $this->_ctx->menu['admin'] = $menu; /*[
-            ['url' => 'code', 'name' => 'code', 'children' => [
-                ['url' => 'code/controller', 'name' => 'controller'],
-                ['url' => 'code/src', 'name' => 'src'],
-                ['url' => 'code/views', 'name' => 'views'],
-                ['url' => 'code/foo', 'name' => 'foo']
-            ]],
-            ['url' => 'config', 'name' => 'config'],
-            ['url' => 'plugins', 'name' => 'plugins'],
-            ['url' => 'ipsum', 'name' => 'ipsum']
-        ];*/
-    }
-   
+        $this->_ctx->menu['admin'] = $menu;
+    }   
 }
