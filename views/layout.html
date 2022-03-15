@@ -19,6 +19,17 @@
                 <nav>
                 <ul>
                 <li><a href="{@pluginRoot}">⚒</a></li>
+                {each @menu.admin}
+                <li><a href="{@pluginRoot}/{url}">{name}</a>
+                    {if children}
+                        <ul>
+                            {each children}
+                                <li><a href={@pluginRoot}/{url}>{name}</a></li>
+                            {/each}
+                        </ul>
+                    {/if}
+                </li>
+                {/each}
                 </ul>
                 </nav>
                 </header>
