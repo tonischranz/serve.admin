@@ -19,8 +19,6 @@ class AdminControllerBase extends Controller
         {
             $name = basename($cp, '.php');
 
-            /*if ($name == 'default') continue;*/
-
             include_once $cp;
             $refClass = new ReflectionClass("tsd\\serve\\admin\\${name}Controller");
             $indexMethod = $refClass->getMethod('showIndex');
@@ -55,7 +53,6 @@ class AdminControllerBase extends Controller
 
                 $mi = ['url' => $name, 'name' => $miAtt->name, 'children' => []];
 
-                //todo: other MenuItems (children)
                 $methods = $refClass->getMethods();
                 
                 foreach($methods as $m)
@@ -95,6 +92,90 @@ class AdminControllerBase extends Controller
 
                 $menu[] = $mi;
             }             
+        }
+
+        foreach (App::$plugins as $key=>$pl)
+        {
+            if (@!$pl['namespace']) continue;
+            
+            if (file_exists(App::PLUGINS . DIRECTORY_SEPARATOR . $key . DIRECTORY_SEPARATOR . Router::CONTROLLER . DIRECTORY_SEPARATOR . 'admin.php'))
+            {
+                include_once App::PLUGINS . DIRECTORY_SEPARATOR . $key . DIRECTORY_SEPARATOR . Router::CONTROLLER . DIRECTORY_SEPARATOR . 'admin.php';
+
+
+                $refClass = new ReflectionClass($pl['namespace'] . '\adminController');
+                $indexMethod = $refClass->getMethod('showIndex');
+
+                if ($indexMethod)
+                {
+                    $miAttrs = $indexMethod->getAttributes('tsd\serve\MenuItem');
+                    $secUserAttr = $indexMethod->getAttributes('tsd\serve\SecurityUser');
+                    $secGroupAttrs = $indexMethod->getAttributes('tsd\serve\SecurityGroup');
+
+                    if (!$miAttrs) continue;
+
+                    $miAtt = $miAttrs[0]->newInstance();
+
+                    if($secUserAttr && $this->_member->isAnonymous()) continue;
+                    if($secGroupAttrs)
+                    {
+                        $ok = false;
+
+                        foreach($secGroupAttrs as $sga)
+                        {
+                            $sgAtt = $sga->newInstance();
+                            if ($this->_member->isInGroup($sgAtt->name))
+                            {
+                                $ok = true;
+                                break;
+                            }
+                        }
+
+                        if (!$ok) continue;
+                    }
+
+                    $mi = ['url' => $key, 'name' => $miAtt->name, 'children' => []];
+
+                    $methods = $refClass->getMethods();
+                    
+                    foreach($methods as $m)
+                    {
+                        if ($m->name == "showIndex") continue;
+
+                        $methodName = strtolower(substr($m->name, 4));
+                        
+                        $miAttrs = $m->getAttributes('tsd\serve\MenuItem');
+                        $secUserAttr = $m->getAttributes('tsd\serve\SecurityUser');
+                        $secGroupAttrs = $m->getAttributes('tsd\serve\SecurityGroup');
+
+                        if (!$miAttrs) continue;
+
+                        $miAtt = $miAttrs[0]->newInstance();
+
+                        if($secUserAttr && $this->_member->isAnonymous()) continue;
+                        if($secGroupAttrs)
+                        {
+                            $ok = false;
+
+                            foreach($secGroupAttrs as $sga)
+                            {
+                                $sgAtt = $sga->newInstance();
+                                if ($this->_member->isInGroup($sgAtt->name))
+                                {
+                                    $ok = true;
+                                    break;
+                                }
+                            }
+
+                            if (!$ok) continue;
+                        }
+
+                        $mi['children'][] = ['url' => "$key/$methodName", 'name' => $miAtt->name];
+                    }
+
+                    $menu[] = $mi;
+                }        
+            }
         }
 
         $this->_ctx->menu['admin'] = $menu;
