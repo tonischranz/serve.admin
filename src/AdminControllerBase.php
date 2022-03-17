@@ -179,5 +179,7 @@ class AdminControllerBase extends Controller
         }
 
         $this->_ctx->menu['admin'] = $menu;
+
+        $this->_ctx->menu['member'] = [['url'=> '/_login/profile', 'name' => 'profile'],['url'=> '/_login/logout', 'name' => 'logout']];
     }   
 }

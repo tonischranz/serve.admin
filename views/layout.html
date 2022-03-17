@@ -29,26 +29,38 @@
                         <ul style="display: flex;">
                             <li>
                                 <details>
-                                <summary></summary>
-                                <div style="position: absolute; top: 3.4rem; left: 0; right: 0; background-color: #abc;">
-                                    <ul style="width: 80rem; margin: auto;">
-                                        {each @menu.admin}
-                                            <li><a href="{@pluginRoot}/{url}">{name}</a>
-                                                {if children}
-                                                    <ul>
-                                                        {each children}
-                                                            <li><a href={@pluginRoot}/{url}>{name}</a></li>
-                                                        {/each}
-                                                    </ul>
-                                                {/if}
-                                            </li>
-                                        {/each}
-                                    </ul>
-                                </div>
-                            </details>
+                                    <summary></summary>
+                                    <div style="position: absolute; top: 3.4rem; left: 0; right: 0; background-color: #abc;">
+                                        <ul style="width: 80rem; margin: auto;">
+                                            {each @menu.admin}
+                                                <li><a href="{@pluginRoot}/{url}">{name}</a>
+                                                    {if children}
+                                                        <ul>
+                                                            {each children}
+                                                                <li><a href={@pluginRoot}/{url}>{name}</a></li>
+                                                            {/each}
+                                                        </ul>
+                                                    {/if}
+                                                </li>
+                                            {/each}
+                                        </ul>
+                                    </div>
+                                </details>
                             </li>
                             <li><a href="{@pluginRoot}/">⚒️</a></li>
-                            <li style="margin-left: auto;"><a href="{@pluginRoot}/">🧒</a></li>
+                            <li style="margin-left: auto; position: relative;">
+                                <details class="member">
+                                    <summary></summary>
+                                    <div style="position: absolute; top: 3.4rem; right: 0; background-color: #abc;">
+                                        <ul >
+                                            {each @menu.member}
+                                                <li><a href="{url}">{name}</a></li>
+                                            {/each}
+                                        </ul>
+                                    </div>
+                                </details>
+                                <!--<a href="{@pluginRoot}/">🧒</a>-->
+                            </li>
                             
                         </ul>
                     </nav>
