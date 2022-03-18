@@ -14,6 +14,7 @@ class AdminControllerBase extends Controller
     public function prepare ()
     {
         $menu = [];
+        $pmenu = [];
         $controllers = glob(App::PLUGINS . DIRECTORY_SEPARATOR . $this->_ctx->layoutPlugin . DIRECTORY_SEPARATOR . Router::CONTROLLER . DIRECTORY_SEPARATOR . '*.php');
         foreach($controllers as $cp)
         {
@@ -173,12 +174,13 @@ class AdminControllerBase extends Controller
                         $mi['children'][] = ['url' => "$key/$methodName", 'name' => $miAtt->name];
                     }
 
-                    $menu[] = $mi;
+                    $pmenu[] = $mi;
                 }        
             }
         }
 
         $this->_ctx->menu['admin'] = $menu;
+        $this->_ctx->menu['plugin'] = $pmenu;
 
         $this->_ctx->menu['member'] = [['url'=> '/_login/profile', 'name' => 'profile'],['url'=> '/_login/logout', 'name' => 'logout']];
     }   

@@ -13,7 +13,7 @@
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
                 <style>
-                    :root {
+                    /*:root {
                         --body-bg-color:        #002;
                         --body-color:           #abc;
                         --link-color:           #088;
@@ -21,7 +21,7 @@
                         --menu-closed-bg-color: #007;
                         --menu-bg-color:        #004d;
                         --menu-color:           #ddd;
-                    }
+                    }*/
                 </style>
 
             </head>
@@ -49,7 +49,21 @@
                                                 </li>
                                             {/each}
                                             </ul>
-
+                                            {if @menu.plugin}
+                                            <ul>
+                                                {each @menu.plugin}
+                                                    <li><a href="{@pluginRoot}/{url}">{name}</a>
+                                                        {if children}
+                                                            <ul>
+                                                                {each children}
+                                                                    <li><a href={@pluginRoot}/{url}>{name}</a></li>
+                                                                {/each}
+                                                            </ul>
+                                                        {/if}
+                                                    </li>
+                                                {/each}
+                                                </ul>
+                                            {/if}
                                         </div>
                                     </div>
                                 </details>
@@ -59,7 +73,7 @@
                             {if @menu.member}
                             <li>
                                 <details class="member">
-                                    <summary></summary>                                    
+                                    <summary><small>{@member.fullname}</small></summary>
                                     <div>
                                         <ul >
                                             {each @menu.member}
