@@ -18,21 +18,25 @@
                         --body-color:           #abc;
                         --link-color:           #088;
                         --link-active-color:    #08f;
+                        --menu-closed-bg-color: #007;
+                        --menu-bg-color:        #004d;
+                        --menu-color:           #ddd;
                     }
                 </style>
 
             </head>
 
             <body>
-                <header style="position: relative;">
+                <header>
                     <nav>
-                        <ul style="display: flex;">
+                        <ul>
                             {if @menu.admin}
                             <li>
-                                <details>
+                                <details class="menu">
                                     <summary></summary>
-                                    <div style="position: absolute; top: 3.4rem; left: 0; right: 0; background-color: #abc;">
-                                        <ul style="width: 80rem; margin: auto;">
+                                    <div>
+                                        <div>
+                                            <ul>
                                             {each @menu.admin}
                                                 <li><a href="{@pluginRoot}/{url}">{name}</a>
                                                     {if children}
@@ -44,17 +48,19 @@
                                                     {/if}
                                                 </li>
                                             {/each}
-                                        </ul>
+                                            </ul>
+
+                                        </div>
                                     </div>
                                 </details>
                             </li>
                             {/if}
-                            <li><a href="{@pluginRoot}/">⚒️</a></li>
+                            <li class="home"><a href="{@pluginRoot}/">⚒️</a></li>
                             {if @menu.member}
-                            <li style="margin-left: auto; position: relative;">
+                            <li>
                                 <details class="member">
-                                    <summary></summary>
-                                    <div style="position: absolute; top: 3.4rem; right: 0; background-color: #abc;">
+                                    <summary></summary>                                    
+                                    <div>
                                         <ul >
                                             {each @menu.member}
                                                 <li><a href="{url}">{name}</a></li>
