@@ -5,6 +5,7 @@ use tsd\serve\admin\AdminControllerBase;
 use tsd\serve\SecurityGroup;
 use tsd\serve\MenuItem;
 use tsd\serve\Router;
+use tsd\serve\ViewEngine;
 
 class CodeController extends AdminControllerBase
 {
@@ -58,7 +59,15 @@ class CodeController extends AdminControllerBase
     #[MenuItem('views')]
     function showViews()
     {
-        return $this->view();
+        $files = [];
+        $paths = glob(ViewEngine::VIEWS . DIRECTORY_SEPARATOR. '**/*.html');
+
+        foreach ($paths as $p)
+        {
+            $files[]=['path'=>$p, 'name'=>basename($p)];
+        }
+
+        return $this->view(['files' => $files]);
     }
 
     #[SecurityGroup("developer")]
