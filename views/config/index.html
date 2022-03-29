@@ -9,8 +9,15 @@
     <main>
       <!--<h1>⚒</h1>      -->
       <form method="post" action="{@pluginRoot}/config">
-        <textarea name="cfg">{cfg}</textarea>
-        <button type="submit">save</button>
+        <textarea name="cfg" style="height: calc(100vh - 16rem);">{cfg}</textarea>
+        <div class="right">
+          <button type="submit">save</button>
+          {if error}
+          <a href="{@pluginRoot}/config" class="btn">cancel</a>
+          {else}
+          <button type="reset">cancel</button>
+          {/if}
+        </div>
       </form>
     </main>
   </body>
