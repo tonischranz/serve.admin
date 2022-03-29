@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>[code]</title>
+  </head>
+
+  <body>
+    <main>
+      <form method="post" action="{@pluginRoot}/code/controller/edit">
+        <input type="hidden" name="name" value="{name}" />
+        <h1>{name}</h1>
+        <textarea name="content" style="height: calc(100vh - 22rem);">{content}</textarea>
+        <div class="right">
+          <button type="submit">save</button>
+          {if error}
+          <a href="{@pluginRoot}/config" class="btn">cancel</a>
+          {else}
+          <button type="reset">cancel</button>
+          {/if}
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
