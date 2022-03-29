@@ -7,8 +7,7 @@
 
   <body>
     <main>
-      <form method="post" action="{@pluginRoot}/code/controller/edit">
-        <input type="hidden" name="name" value="{name}" />
+      <form method="post" action="{@pluginRoot}/code/controller/edit?name={name}">
         <h1>{name}</h1>
         <textarea name="content" style="height: calc(100vh - 22rem);">{content}</textarea>
         <div class="right">
