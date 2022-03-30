@@ -64,11 +64,13 @@ class CodeController extends AdminControllerBase
 
     static function readViews(string $path = ViewEngine::VIEWS)
     {
+        $len = strlen(ViewEngine::VIEWS) + 1;
+
         foreach (glob($path . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR) as $d) 
-            yield ['path'=>$d, 'type'=>'dir', 'name'=>basename($d), 'children' => CodeController::readViews($d)];
+            yield ['path'=>substr($d, $len), 'type'=>'dir', 'name'=>basename($d), 'children' => CodeController::readViews($d)];
                
         foreach (glob($path . DIRECTORY_SEPARATOR . '*.htm?') as $f)
-            yield ['path'=>$f, 'type'=>'file', 'name'=>basename($f)];
+            yield ['path'=>substr($f, $len), 'type'=>'file', 'name'=>basename($f)];
     }
 
     #[SecurityGroup("developer")]
