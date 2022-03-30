@@ -58,58 +58,14 @@ class CodeController extends AdminControllerBase
     #[SecurityGroup("developer")]
     #[MenuItem('views')]
     function showViews()
-    {
-        $files = CodeController::readDir();
-
-        
-        //$files = \glob(ViewEngine::VIEWS . DIRECTORY_SEPARATOR . '**');
-        /*$sd = scandir(ViewEngine::VIEWS);
-
-        foreach ($sd as $d)
-        {
-            if ($d == '.' || $d == '..') continue;
-            if (\is_dir($d))
-            {
-                $sd2 = scandir(ViewEngine::VIEWS);
-                foreach ($sd2 as $d2)
-                {
-                    if ($d2 == '.' || $d2 == '..') continue;
-                    if (\is_dir($d2))
-                    {
-                        $sd3 = scandir(ViewEngine::VIEWS);
-                        foreach ($sd3 as $d3)
-                        {
-                            if ($d3 == '.' || $d3 == '..') continue;
-          
-                            $files[] = ['path'=>$d3, 'name'=>$d3];
-                        }
-                    }
-                    else
-                    {
-                        $files[] = ['path'=>$d2, 'name'=>$d2];
-                    }
-                }
-            }
-            else
-            {
-                $files[] = ['path'=>$d, 'name'=>$d];
-            }
-        }
-        //$paths = glob(ViewEngine::VIEWS . DIRECTORY_SEPARATOR. '*');// . DIRECTORY_SEPARATOR .'*.html');
-
-
-        /*foreach ($paths as $p)
-        {
-            $files[]=['path'=>$p, 'name'=>basename($p)];
-        }*/
-
-        return $this->view(['files' => $files]);
+    {        
+        return $this->view(['files' => CodeController::readViews()]);
     }
 
-    static function readDir(string $path = ViewEngine::VIEWS)
+    static function readViews(string $path = ViewEngine::VIEWS)
     {
         foreach (glob($path . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR) as $d) 
-            yield ['path'=>$d, 'type'=>'dir', 'name'=>basename($d), 'children' => CodeController::readDir($d)];
+            yield ['path'=>$d, 'type'=>'dir', 'name'=>basename($d), 'children' => CodeController::readViews($d)];
                
         foreach (glob($path . DIRECTORY_SEPARATOR . '*.htm?') as $f)
             yield ['path'=>$f, 'type'=>'file', 'name'=>basename($f)];
