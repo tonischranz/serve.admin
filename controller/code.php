@@ -59,7 +59,7 @@ class CodeController extends AdminControllerBase
     #[MenuItem('views')]
     function showViews()
     {
-        $files = [];
+        $files = CodeController::readDir();
 
         
         //$files = \glob(ViewEngine::VIEWS . DIRECTORY_SEPARATOR . '**');
@@ -104,6 +104,15 @@ class CodeController extends AdminControllerBase
         }*/
 
         return $this->view(['files' => $files]);
+    }
+
+    static function readDir(string $path = ViewEngine::VIEWS)
+    {
+        foreach (glob($path . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR) as $d) 
+            yield ['path'=>$d, 'type'=>'dir', 'name'=>basename($d), 'children' => CodeController::readDir($d)];
+               
+        foreach (glob($path . DIRECTORY_SEPARATOR . '*.htm?') as $f)
+            yield ['path'=>$f, 'type'=>'file', 'name'=>basename($f)];
     }
 
     #[SecurityGroup("developer")]

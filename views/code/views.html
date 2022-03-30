@@ -3,15 +3,43 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>[code]</title>
+    <style>
+      ul.views, ul.views ul {list-style: none;}
+      li.file::before {content: "📄";}
+      li.dir::before {content: "📁";}
+      li.new::before {content: "＋"; color: #0a0;}
+    </style>
   </head>
 
   <body>
     <main>
       <h1>⚒ views</h1>
-      <ul>
+      <ul class="views">
         {each files}
-        <li><a href="{@pluginRoot}/code/controller/edit?name={name}">{name}</a></li>
+        <li class="{type}"><a href="{@pluginRoot}/code/views/edit?path={path}">{name}</a>
+          {if children}
+            <ul>
+              {each children}
+                <li class="{type}"><a href="{@pluginRoot}/code/views/edit?path={path}">{name}</a>
+                  {if children}
+                    <ul>
+                      {each children}
+                        <li class="{type}"><a href="{@pluginRoot}/code/views/edit?path={path}">{name}</a></li>
+                      {/each}
+                      <li class="new"><a href="{@pluginRoot}/code/views/new?path={path}">new file</a></li>
+                      <li class="new"><a href="{@pluginRoot}/code/views/newdir?path={path}">new dir</a></li>
+                    </ul>
+                  {/if}
+                </li>
+              {/each}
+              <li class="new"><a href="{@pluginRoot}/code/views/new?path={path}">new file</a></li>
+              <li class="new"><a href="{@pluginRoot}/code/views/newdir?path={path}">new dir</a></li>
+            </ul>
+          {/if}
+        </li>
         {/each}
+        <li class="new"><a href="{@pluginRoot}/code/views/new?path={path}">new file</a></li>
+        <li class="new"><a href="{@pluginRoot}/code/views/newdir?path={path}">new dir</a></li>
       </ul>
     </main>
   </body>
