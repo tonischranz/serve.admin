@@ -4,10 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>[code]</title>
     <style>
+      ul.views {padding-inline-start: 0;}
+      ul.views ul {padding-inline-start: 1.5em;}
       ul.views, ul.views ul {list-style: none;}
-      li.file::before {content: "📄";}
-      li.dir::before {content: "📁";}
-      li.new::before {content: "＋"; color: #0a0;}
+      ul.views li.file::before {content: "📄";}
+      ul.views li.dir::before {content: "📁";}
+      ul.views li.new::before {content: "＋"; color: #0a0;}
+      ul.views li::before {padding-right:.5em;}
     </style>
   </head>
 
