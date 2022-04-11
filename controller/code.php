@@ -76,7 +76,15 @@ class CodeController extends AdminControllerBase
     #[SecurityGroup("developer")]
     function showViewsEdit(array $path)
     {
-        return $this->view(['content' => 'foo', 'name' => 'bar']);
+        $ext = array_pop($path);
+        $name = array_pop($path);
+
+        $filePath = implode(DIRECTORY_SEPARATOR, $path).DIRECTORY_SEPARATOR.$name.'.'.$ext;
+
+        $content = file_get_contents(ViewEngine::VIEWS. DIRECTORY_SEPARATOR.$filePath);
+
+
+        return $this->view(['content' => $content, 'name' => $name]);
     }
 
     #[SecurityGroup("developer")]
