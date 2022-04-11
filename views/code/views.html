@@ -19,15 +19,15 @@
       <h1>⚒ views</h1>
       <ul class="views">
         {each files}
-        <li class="{type}"><a href="{@pluginRoot}/code/views/edit?path={path}">{name}</a>
+        <li class="{type}"><a href="{@pluginRoot}/code/views/{path}/edit">{name}</a>
           {if children}
             <ul>
               {each children}
-                <li class="{type}"><a href="{@pluginRoot}/code/views/edit?path={path}">{name}</a>
+                <li class="{type}"><a href="{@pluginRoot}/code/views/{path}/edit">{name}</a>
                   {if children}
                     <ul>
                       {each children}
-                        <li class="{type}"><a href="{@pluginRoot}/code/views/edit?path={path}">{name}</a></li>
+                        <li class="{type}"><a href="{@pluginRoot}/code/views/{path}/edit">{name}</a></li>
                       {/each}
                       <!--<li class="new"><a href="{@pluginRoot}/code/views/new?path={path}">new file</a></li>-->
                     </ul>
@@ -40,8 +40,8 @@
           {/if}
         </li>
         {/each}
-        <li class="new"><a href="{@pluginRoot}/code/views/new?path={path}">new file</a></li>
-        <li class="new"><a href="{@pluginRoot}/code/views/newdir?path={path}">new dir</a></li>
+        <li class="new"><a href="{@pluginRoot}/code/views/{path}/new">new file</a></li>
+        <li class="new"><a href="{@pluginRoot}/code/views/{path}/newdir">new dir</a></li>
       </ul>
     </main>
   </body>

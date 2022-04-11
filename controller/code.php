@@ -67,10 +67,16 @@ class CodeController extends AdminControllerBase
         $len = strlen(ViewEngine::VIEWS) + 1;
 
         foreach (glob($path . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR) as $d) 
-            yield ['path'=>substr($d, $len), 'type'=>'dir', 'name'=>basename($d), 'children' => CodeController::readViews($d)];
+            yield ['path'=>str_replace(DIRECTORY_SEPARATOR, '/', substr($d, $len)), 'type'=>'dir', 'name'=>basename($d), 'children' => CodeController::readViews($d)];
                
         foreach (glob($path . DIRECTORY_SEPARATOR . '*.htm?') as $f)
-            yield ['path'=>substr($f, $len), 'type'=>'file', 'name'=>basename($f)];
+            yield ['path'=>str_replace(DIRECTORY_SEPARATOR, '/', substr($f, $len)), 'type'=>'file', 'name'=>basename($f)];
+    }
+
+    #[SecurityGroup("developer")]
+    function showViewsEdit(array $path)
+    {
+        return $this->view(['content' => 'foo', 'name' => 'bar']);
     }
 
     #[SecurityGroup("developer")]
