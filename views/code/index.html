@@ -3,11 +3,20 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>[code]</title>
+    <style>
+      .fg.tiles>div {background: #8883; border-radius: 1em; padding: 1em; margin: 1em; width:calc(33.3% - 2em);}
+      @media screen and (max-width: 36em) {.fg.tiles>div {width:calc(100% - 2em);}}
+    </style>
   </head>
 
   <body>
     <main>
-      <h1>⚒</h1>      
+      <!--<h1>⚒</h1>      -->
+      <div class="fg tiles">
+        <div><a href="{@pluginRoot}/code/controller">controller</a></div>
+        <div><a href="{@pluginRoot}/code/views">views</a></div>
+        <div><a href="{@pluginRoot}/code/src">src</a></div>
+      </div>
     </main>
   </body>
 </html>

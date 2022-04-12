@@ -2,18 +2,18 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>[config]</title>
+    <title>[code]</title>
   </head>
 
   <body>
     <main>
-      <!--<h1>⚒</h1>      -->
-      <form method="post" action="{@pluginRoot}/config">
-        <textarea name="cfg" style="height: calc(100vh - 16rem);">{cfg}</textarea>
+      <form method="post" action="{@pluginRoot}/code/views/{path}/edit">
+        <input name="name" type="text" value="{name}"/>
+        <textarea name="content" style="height: calc(100vh - 20rem);">{content}</textarea>
         <div class="right">
           <button type="submit">save</button>
           {if error}
-          <a href="{@pluginRoot}/config" class="btn">cancel</a>
+          <a href="{@pluginRoot}/code/views/{path}/edit" class="btn">cancel</a>
           {else}
           <button type="reset">cancel</button>
           {/if}

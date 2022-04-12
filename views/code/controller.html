@@ -2,15 +2,15 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>[member]</title>
+    <title>[code]</title>
   </head>
 
   <body>
     <main>
-      <h1>⚒ members</h1>      
+      <h1>⚒ controller</h1>
       <ul>
-        {each users}
-          <li>{name} ({each groups}{.} {/each})</li>
+        {each files}
+        <li><a href="{@pluginRoot}/code/controller/{name}/edit">{name}</a></li>
         {/each}
       </ul>
     </main>

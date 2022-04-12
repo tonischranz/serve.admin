@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>[code]</title>
+    <style>
+      ul.views {padding-inline-start: 0;}
+      ul.views ul {padding-inline-start: 1.5em; margin-bottom: .75em;}
+      ul.views, ul.views ul {list-style: none;}
+      ul.views li.file::before {content: "📄";}
+      ul.views li.dir::before {content: "📁";}
+      ul.views li.new::before {content: "✚"; color: #0a0; padding-left:.125em;padding-right:.65em;}
+      ul.views li::before {padding-right:.5em;}
+    </style>
+  </head>
+
+  <body>
+    <main class="l">
+      <h1>⚒ views</h1>
+      <ul class="views">
+        {each files}
+        <li class="{type}"><a href="{@pluginRoot}/code/views/{path}/edit">{name}</a>
+          {if children}
+            <ul>
+              {each children}
+                <li class="{type}"><a href="{@pluginRoot}/code/views/{path}/edit">{name}</a>
+                  {if children}
+                    <ul>
+                      {each children}
+                        <li class="{type}"><a href="{@pluginRoot}/code/views/{path}/edit">{name}</a></li>
+                      {/each}
+                      <!--<li class="new"><a href="{@pluginRoot}/code/views/new?path={path}">new file</a></li>-->
+                    </ul>
+                  {/if}
+                </li>
+              {/each}
+              <!--<li class="new"><a href="{@pluginRoot}/code/views/new?path={path}">new file</a></li>
+              <li class="new"><a href="{@pluginRoot}/code/views/newdir?path={path}">new dir</a></li>-->
+            </ul>
+          {/if}
+        </li>
+        {/each}
+        <li class="new"><a href="{@pluginRoot}/code/views/{path}/new">new file</a></li>
+        <li class="new"><a href="{@pluginRoot}/code/views/{path}/newdir">new dir</a></li>
+      </ul>
+    </main>
+  </body>
+</html>
