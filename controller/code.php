@@ -6,6 +6,7 @@ use tsd\serve\SecurityGroup;
 use tsd\serve\MenuItem;
 use tsd\serve\Router;
 use tsd\serve\ViewEngine;
+use tsd\serve\Factory;
 
 class CodeController extends AdminControllerBase
 {
@@ -33,11 +34,14 @@ class CodeController extends AdminControllerBase
     }
 
     #[SecurityGroup("developer")]
-    function showControllerEdit(string $name)
+    function showControllerEdit(array $path)
     {
-        $content = file_get_contents(Router::CONTROLLER . DIRECTORY_SEPARATOR.$name);
+        $ext = array_pop($path);
+        $name = array_pop($path);
 
-        return $this->view(['content'=>$content, 'name'=>$name]);
+        $content = file_get_contents(Router::CONTROLLER . DIRECTORY_SEPARATOR."$name.$ext");
+
+        return $this->view(['content'=>$content, 'name'=>"$name.$ext"]);
     }
 
     #[SecurityGroup("developer")]
@@ -84,13 +88,33 @@ class CodeController extends AdminControllerBase
         $content = file_get_contents(ViewEngine::VIEWS. DIRECTORY_SEPARATOR.$filePath);
 
 
-        return $this->view(['content' => $content, 'name' => $name]);
+        return $this->view(['content' => $content, 'name' => "$name.$ext"]);
     }
 
     #[SecurityGroup("developer")]
     #[MenuItem('src')]
     function showSrc()
     {
-        return $this->view();
+        $files = [];
+        $paths = glob(Factory::SRC . DIRECTORY_SEPARATOR. '*.php');
+
+        foreach ($paths as $p)
+        {
+            $files[]=['path'=>$p, 'name'=>basename($p)];
+        }
+
+
+        return $this->view(['files' => $files]);
+    }
+
+    #[SecurityGroup("developer")]
+    function showSrcEdit(array $path)
+    {
+        $ext = array_pop($path);
+        $name = array_pop($path);
+
+        $content = file_get_contents(Factory::SRC . DIRECTORY_SEPARATOR."$name.$ext");
+
+        return $this->view(['content'=>$content, 'name'=>"$name.$ext"]);
     }
 }

@@ -7,13 +7,13 @@
 
   <body>
     <main>
-      <form method="post" action="{@pluginRoot}/code/controller/{name}/edit">
+      <form method="post" action="{@pluginRoot}/code/src/{name}/edit">
         <input name="name" type="text" value="{name}"/>
         <textarea name="content" style="height: calc(100vh - 20rem);">{content}</textarea>
         <div class="right">
           <button type="submit">save</button>
           {if error}
-          <a href="{@pluginRoot}/code/controller/{name}/edit" class="btn">cancel</a>
+          <a href="{@pluginRoot}/code/src/{name}/edit" class="btn">cancel</a>
           {else}
           <button type="reset">cancel</button>
           {/if}
