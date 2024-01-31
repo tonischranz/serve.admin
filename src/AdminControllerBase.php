@@ -21,7 +21,7 @@ class AdminControllerBase extends Controller
             $name = basename($cp, '.php');
 
             include_once $cp;
-            $refClass = new ReflectionClass("tsd\\serve\\admin\\${name}Controller");
+            $refClass = new ReflectionClass("tsd\\serve\\admin\\{$name}Controller");
             $indexMethod = $refClass->getMethod('showIndex');
 
             if ($indexMethod)
